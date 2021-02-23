@@ -94,6 +94,7 @@ public class LRUCache2 {
             }else{
                 if(hashMap.size()>=captity)
                 {
+                    hashMap.remove(dlinkList.getLast().key);
                     dlinkList.removeLast();
                 }
                 ListNode temp = new ListNode(key,value);

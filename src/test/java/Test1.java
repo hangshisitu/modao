@@ -1,5 +1,7 @@
 import ByteDance.NumberMatch;
 import ByteDance.StoneGameVII;
+import geek.wangzheng.Hunters;
+import geek.wangzheng.NoSort;
 import maodao.link.IsCycString;
 import modao.array.LongestOnes;
 import modao.array.MinSubArray;
@@ -7,9 +9,19 @@ import modao.backtrace.AssignBike;
 import modao.backtrace.SplitIntoFibonacci;
 import modao.backtrace.WiggleMaxLength;
 import modao.db.*;
+import modao.heap.MinHeap;
 import modao.match.Kmp;
+import modao.queue.CasQueue;
+import modao.queue.CycQueue;
+import modao.recursion.Hanota;
+import modao.skip.list.SkipList;
+import modao.skip.list.SkipList2;
+import modao.skip.list.SkipList3;
 import modao.sliding.window.C395;
 import modao.sliding.window.MinWindow;
+import modao.sort.*;
+import modao.tree.BinarySearchTree;
+import modao.tree.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -197,20 +209,6 @@ public class Test1 {
         Queen queen = new Queen();
         List<List<String>> res = queen.solveNQueens(4);
         System.out.println(res.toString());
-    }
-
-    @Test
-    public void testQuickSort()
-    {
-        QuerySort querySort = new QuerySort();
-        int[] nums = {7,8,10,1,2,3,4,5,6};
-        querySort.quickSort(nums,0,nums.length-1);
-        List<Integer> list = new ArrayList<Integer>();
-        for(int i=0; i<nums.length;++i)
-        {
-            list.add(nums[i]);
-        }
-        System.out.println(list);
     }
 
     @Test
@@ -608,17 +606,519 @@ public class Test1 {
         Assert.assertEquals(false,isCycString.isCycString(isCycString.buildNodes("")));
     }
 
+    @Test
+    public void testHanota()
+    {
+        Hanota hanota = new Hanota();
+        List<Integer> B= new ArrayList<>();
+        List<Integer> C= new ArrayList<>();
+        List<Integer> A= new ArrayList<Integer>();
+        A.add(6);
+        A.add(5);
+        A.add(4);
+        A.add(3);
+        A.add(2);
+        A.add(1);
+        A.add(0);
+        hanota.hanota(A,B,C);
+        System.out.println(C.toString());
+    }
+
+    @Test
+    public  void testCasQueue()
+    {
+        CasQueue<Integer> casQueue = new CasQueue<>(3);
+        Assert.assertEquals(true,casQueue.enqueue(1));
+        Assert.assertEquals(true,casQueue.enqueue(2));
+        Assert.assertEquals(true,casQueue.enqueue(3));
+        Assert.assertEquals(false,casQueue.enqueue(4));
+        Assert.assertEquals(Integer.valueOf(1),casQueue.dequeue());
+        Assert.assertEquals(true,casQueue.enqueue(4));
+        Assert.assertEquals(false,casQueue.enqueue(5));
+        Assert.assertEquals(Integer.valueOf(2),casQueue.dequeue());
+        Assert.assertEquals(true,casQueue.enqueue(5));
+        Assert.assertEquals(Integer.valueOf(3),casQueue.dequeue());
+        Assert.assertEquals(Integer.valueOf(4),casQueue.dequeue());
+        Assert.assertEquals(Integer.valueOf(5),casQueue.dequeue());
+
+        CycQueue<Integer> cycQueue = new CycQueue<>(3);
+        Assert.assertEquals(true,cycQueue.enqueue(1));
+        Assert.assertEquals(true,cycQueue.enqueue(2));
+        Assert.assertEquals(true,cycQueue.enqueue(3));
+        Assert.assertEquals(false,cycQueue.enqueue(4));
+        Assert.assertEquals(Integer.valueOf(1),cycQueue.dequeue());
+        Assert.assertEquals(true,cycQueue.enqueue(4));
+        Assert.assertEquals(false,cycQueue.enqueue(5));
+        Assert.assertEquals(Integer.valueOf(2),cycQueue.dequeue());
+        Assert.assertEquals(true,cycQueue.enqueue(5));
+        Assert.assertEquals(Integer.valueOf(3),cycQueue.dequeue());
+        Assert.assertEquals(Integer.valueOf(4),cycQueue.dequeue());
+        Assert.assertEquals(Integer.valueOf(5),cycQueue.dequeue());
+    }
+
+    @Test
+    public void testBubbleSort()
+    {
+        int[] array = {5,3,4,2,1,0,-8,9,3};
+        BubbleSort bubbleSort = new BubbleSort();
+        bubbleSort.sort(array);
+        List<Integer> temp = new ArrayList<Integer>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testInsertionSort()
+    {
+        int[] array = {5,3,4,2,1,0,-8,9,3};
+        InsertionSort insertionSort = new InsertionSort();
+        insertionSort.sort(array);
+        List<Integer> temp = new ArrayList<Integer>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testBinaryInserionSort()
+    {
+        int[] array = {5,3,4,2,1,3,5,5,2,0,-8,9,3};
+        BinaryInsertionSort binaryInserionSort = new BinaryInsertionSort();
+        binaryInserionSort.sort(array);
+        List<Integer> temp = new ArrayList<Integer>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+    @Test
+    public void testSelectionSort()
+    {
+        int[] array = {5,3,4,2,1,0,-8,9,3};
+        SelectionSort selectionSort = new SelectionSort();
+        selectionSort.sort(array);
+        List<Integer> temp = new ArrayList<Integer>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testQuickSort()
+    {
+        int[] array = {5,3,4,2,1,0,-8,9,3};
+        QuickSort quickSort = new QuickSort();
+        quickSort.sort(array,0,array.length-1);
+        List<Integer> temp = new ArrayList<Integer>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testMergeSort()
+    {
+        int[] array = {5,3,4,2,1,0,-8,9,3};
+        MergeSort mergeSort = new MergeSort();
+        mergeSort.sort(array,0,array.length-1);
+        List<Integer> temp = new ArrayList<Integer>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testCountingSort()
+    {
+        int[] array = {4,3,5,1,2,5,2,3,9,10,7,8,9,9,10,4,5,3,2};
+        CountingSort countingSort = new CountingSort();
+        countingSort.sort(array);
+        List<Integer> temp = new ArrayList<Integer>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testHeapSort()
+    {
+        int[] array = {4,3,5,1,2,5,2,3,9,10,7,8,9,9,10,4,5,3,2};
+        HeapSort heapSort = new HeapSort();
+        heapSort.sort(array);
+
+        List<Integer> temp = new ArrayList<Integer>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+
+        int[] array2 = {5,3,4,2,1,0,-8,9,3};
+
+        heapSort.sort(array2);
+
+        temp.clear();
+        for(int i=0;i<array2.length;++i)
+        {
+            temp.add(array2[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testBucketSort()
+    {
+        int[] array = {0,18,1000,999,399,400,200,201,199,588,766,4};
+        BucketSort bucketSort = new BucketSort();
+        bucketSort.sort(array);
+        List<Integer> temp = new ArrayList<Integer>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testRadixSort()
+    {
+        long[] array = {15019289855L,13426851128L,18426851128L,15519289855L,13026851129L,15119289755L,15019289755L,15019289856L};
+        RadixSort radixSort = new RadixSort();
+        radixSort.sort(array);
+        List<Long> temp = new ArrayList<Long>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testNoSort()
+    {
+        char[] array = {'D','a','F','B','c','A','z'};
+        NoSort noSort = new NoSort();
+//        noSort.sort(array);
+        noSort.sort2(array);
+        List<Character> temp = new ArrayList<Character>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testNoSort3()
+    {
+        char[] array = {'D','7','1','a','F','9','B','c','A','z'};
+        NoSort noSort = new NoSort();
+        noSort.sort3(array);
+        List<Character> temp = new ArrayList<Character>();
+        for(int i=0;i<array.length;++i)
+        {
+            temp.add(array[i]);
+        }
+        System.out.println(temp.toString());
+
+        int minInt = Integer.MIN_VALUE;
+        int maxInt = Integer.MAX_VALUE;
+        System.out.println(String.format("%d,%d,%d,%d,%d,%d",minInt,maxInt,(long)Math.abs(minInt),(long)0-minInt,maxInt+1,0-(long)minInt));
+    }
+
+    @Test
+    public void testRandom()
+    {
+        for(int i=0;i<10;++i)
+        {
+            Random random = new Random();
+            System.out.println(String.format("%d,%f",random.nextInt(10),Math.random()));
+        }
+    }
+
+    @Test
+    public void testSkipList()
+    {
+        SkipList<Integer> skipList = new SkipList<Integer>();
+        skipList.add(-5,0);
+        skipList.add(12,0);
+        skipList.add(2,0);
+        skipList.add(1,0);
+        skipList.add(8,0);
+        skipList.add(10,0);
+        skipList.add(3,0);
+        skipList.add(6,0);
+        skipList.add(5,0);
+        skipList.add(9,0);
+        skipList.add(7,0);
+        skipList.add(33,0);
+        skipList.add(16,0);
+        skipList.add(9,0);
+        skipList.add(10,0);
+
+        System.out.println(skipList.toString());
+
+        skipList.remove(5);
+
+        System.out.println(skipList.toString());
+    }
+
+    @Test
+    public void testSkipList2()
+    {
+        SkipList2 skipList = new SkipList2();
+        skipList.add(-5);
+        skipList.add(12);
+        skipList.add(2);
+        skipList.add(1);
+        skipList.add(8);
+        skipList.add(10);
+        skipList.add(3);
+        skipList.add(6);
+        skipList.add(5);
+        skipList.add(9);
+        skipList.add(7);
+        skipList.add(33);
+        skipList.add(16);
+
+        System.out.println(skipList.toString());
+
+        skipList.remove(5);
+
+        System.out.println(skipList.toString());
+
+    }
+
+    @Test
+    public void testSkipList3()
+    {
+        SkipList3 skipList = new SkipList3();
+        skipList.add(-5);
+        skipList.add(12);
+        skipList.add(2);
+        skipList.add(1);
+        skipList.add(8);
+        skipList.add(10);
+        skipList.add(3);
+        skipList.add(6);
+        skipList.add(5);
+        skipList.add(9);
+        skipList.add(7);
+        skipList.add(33);
+        skipList.add(16);
+        skipList.add(4);
+        skipList.add(-1);
+        System.out.println(skipList.toString());
+
+        skipList.remove(5);
+
+        System.out.println(skipList.toString());
+
+    }
+
+    @Test
+    public void testHunters()
+    {
+        Hunters hunters = new Hunters();
+
+        hunters.add(new Hunters.Hunter(1,10));
+        hunters.add(new Hunters.Hunter(2,50));
+        hunters.add(new Hunters.Hunter(3,20));
+        hunters.add(new Hunters.Hunter(4,70));
+        hunters.add(new Hunters.Hunter(5,30));
+        hunters.add(new Hunters.Hunter(6,40));
+        hunters.add(new Hunters.Hunter(7,100));
+        hunters.add(new Hunters.Hunter(8,80));
+        hunters.add(new Hunters.Hunter(9,75));
+        hunters.add(new Hunters.Hunter(10,55));
+
+        Assert.assertEquals(Integer.valueOf(100),hunters.findById(7).score);
+
+        System.out.println(hunters.findByScoreRange(15,80).toString());
+
+        hunters.updateScoreById(7,50);
+
+        System.out.println(hunters.findByScoreRange(15,80).toString());
+
+        hunters.removeById(7);
+
+        System.out.println(hunters.findByScoreRange(15,80).toString());
+
+        Assert.assertEquals(Integer.valueOf(2),hunters.rankByScore(5).id);
+
+        List<Hunters.Hunter> temp = new ArrayList<>();
+        Hunters.Hunter[] res = hunters.rankByScoreRange(3,8);
+        for(int i=0;i<res.length;++i)
+        {
+            temp.add(res[i]);
+        }
+        System.out.println(temp.toString());
+    }
+
+    @Test
+    public void testTreeNode()
+    {
+        TreeNode temp7 = new TreeNode(7);
+        TreeNode temp8 = new TreeNode(8);
+        TreeNode temp9 = new TreeNode(9);
+        TreeNode temp5 = new TreeNode(5,null,temp9);
+        TreeNode temp6 = new TreeNode(6);
+        TreeNode temp3 = new TreeNode(3,null,temp7);
+        TreeNode temp4 = new TreeNode(4,temp8,null);
+        TreeNode temp1 = new TreeNode(1,temp3,temp4);
+        TreeNode temp2 = new TreeNode(2,temp5,temp6);
+        TreeNode root = new TreeNode(0,temp1,temp2);
+
+        List<Integer> res = new ArrayList<>();
+
+        root.dfsBefore(root,res);
+        System.out.println(res);
+
+        res.clear();
+        root.dfsBeforeEx(root,res);
+        System.out.println(res);
+
+        res.clear();
+        root.dfsMid(root,res);
+        System.out.println(res);
+
+        res.clear();
+        root.dfsMidEx(root,res);
+        System.out.println(res);
+
+        res.clear();
+        root.dfsAfter(root,res);
+        System.out.println(res);
+
+        res.clear();
+        root.dfsAfterEx(root,res);
+        System.out.println(res);
+
+        res.clear();
+        root.bfs(root,res);
+        System.out.println(res);
+
+        res.clear();
+        root.bfsEx(root,res);
+        System.out.println(res);
+
+        Assert.assertEquals(3,root.height(root));
+
+    }
+
+    @Test
+    public void testBinarySearchTree()
+    {
+        BinarySearchTree binarySearchTree  = new BinarySearchTree();
+        binarySearchTree.insert(9);
+        binarySearchTree.insert(4);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(10);
+        binarySearchTree.insert(2);
+        binarySearchTree.insert(15);
+        binarySearchTree.insert(11);
+        binarySearchTree.insert(3);
+        binarySearchTree.insert(7);
+        binarySearchTree.insert(4);
+        binarySearchTree.insert(11);
+
+        List<Integer> res = new ArrayList<>();
+        binarySearchTree.dfsMid(binarySearchTree.root,res);
+        System.out.println(res);
+
+        List<BinarySearchTree.TreeNode> data = binarySearchTree.find(11);
+        System.out.println(data);
+        data.clear();
+        data = binarySearchTree.find(4);
+        System.out.println(data);
+
+        data.clear();
+        data = binarySearchTree.find(5);
+        System.out.println(data);
+
+        binarySearchTree.remove(4);
+
+        res.clear();
+        binarySearchTree.dfsMid(binarySearchTree.root,res);
+        System.out.println(res);
+
+        binarySearchTree.remove(9);
+        res.clear();
+        binarySearchTree.dfsMid(binarySearchTree.root,res);
+        System.out.println(res);
+
+        binarySearchTree.remove(11);
+        res.clear();
+        binarySearchTree.dfsMid(binarySearchTree.root,res);
+        System.out.println(res);
+
+    }
+
+    @Test
+    public void testMinHeap()
+    {
+        MinHeap minHeap = new MinHeap(10);
+        minHeap.insert(5);
+        minHeap.insert(3);
+        minHeap.insert(6);
+        minHeap.insert(4);
+        minHeap.insert(7);
+        minHeap.insert(8);
+        minHeap.insert(9);
+        minHeap.insert(1);
+        minHeap.insert(2);
+        minHeap.insert(5);
+
+        System.out.println(minHeap.toString());
+
+        Assert.assertEquals(1,minHeap.poll());
+
+        System.out.println(minHeap.toString());
+
+        Assert.assertEquals(2,minHeap.poll());
+
+        System.out.println(minHeap.toString());
+
+        Assert.assertEquals(3,minHeap.poll());
+
+        System.out.println(minHeap.toString());
+
+        Assert.assertEquals(4,minHeap.poll());
+
+        System.out.println(minHeap.toString());
+
+        Assert.assertEquals(5,minHeap.poll());
+
+        System.out.println(minHeap.toString());
+    }
+
+    @Test
+    public void testPriorityQueue()
+    {
+        PriorityQueue<Integer> q =new PriorityQueue<>();
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        System.out.println(q.poll());
+        System.out.println(q.poll());
+        System.out.println(q.poll());
+    }
+
 
 }
 
-//1,3,4,2,5,7
-//2,1,3,8,9,4
-//3,5,7,2,3,4
-//8,1,4,2,5,6
-//4,5,3,1,2,7
-//3,6,3,4,2,8
 
-//1,3,5,9
-//2,1,3,4
-//5,2,6,7
-//6,8,4,3
